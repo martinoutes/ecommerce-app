@@ -9,12 +9,14 @@ import { useState, useEffect } from "react";
 const ItemListContainer = () => {
     
     const [item, setItem] = useState(Productos);
-    const { id } = useParams();
+    const {id} = useParams();
 
     
     useEffect(()=>{
         filtrarProductos.then((response)=>{
-            setItem(response)
+            if (response?.length > 0) {
+                setItem(response)
+            }
         })
     }, [id])
 

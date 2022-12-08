@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
     const seleccionarProducto = new Promise ((resolve, reject) => {
 
         setTimeout(()=>{
-            const nuevoProducto = Productos.filter((producto) => producto.id == productid);
+            const nuevoProducto = Productos.filter((producto) => producto.id === productid);
             resolve(nuevoProducto)
         });
 
@@ -37,12 +37,7 @@ const ItemDetailContainer = () => {
             <Container>
 
                 <Row className="justify-content-left py-5 g-4"  xs={1} md={2}>
-                {
-                        item.map((item) => {
-                            return <ItemDetail item={item} key={item.id}/>
-                        })
-                    }
-                    
+                    <ItemDetail item={item} key={item.id}/>
                 </Row>
             
             </Container>
