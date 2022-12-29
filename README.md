@@ -19,7 +19,7 @@ Descargar o clonar el proyecto e instalar todas sus dependencias.
 Una vez instaladas, ejecutar la aplicación.
 ### `npm start`
 
-Abrir [http://localhost:3000] para usar la aplicación.
+Abrir [http://localhost:3000](http://localhost:3000) para usar la aplicación.
 
 ## Capturas
 ![1.jpg](/capturas/1.jpg)
