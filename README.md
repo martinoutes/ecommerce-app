@@ -1,5 +1,7 @@
 # RECORD Ecommerce - Proyecto Final React JS | Coderhouse
 
+La aplicación se puede ver online en [https://record-ecommerce.netlify.app/](https://record-ecommerce.netlify.app/)
+
 Este proyecto es el trabajo final para el curso de React JS en Coderhouse. Su funcionamiento permite consultar un catálogo de productos e ir agregándolos a un carrito de compras y simular un proceso final de compra. 
 
 Toda la información de los productos: nombre, precio, stock, descripción, etc. está alojada en una base de datos de Firestore. En todo momento se puede consultar el contenido del carrito de compras e ir modificando el contenido así como eliminar productos.
