@@ -15,5 +15,9 @@ export const categories = [
         nombre: 'Smartwatch',
         id: 'smartwatch',
     },
+    {
+        nombre: 'Teléfonos',
+        id: 'telefonos',
+    }
 
 ];

@@ -1,45 +1,59 @@
 import React from "react";
-import {Container, Row} from 'react-bootstrap';
-import { Productos } from '../Productos/Productos'
+import {doc, getDoc, getFirestore} from 'firebase/firestore';
+import {Container} from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
-
+import ItemNotFound from "../ItemNotFound/ItemNotFound";
+import Loader from "../Loader/Loader";
 
 
 const ItemDetailContainer = () => {
-
+    
+    const [item, setItem] = useState([]);
     const { productid } = useParams();
-    const [item, setItem] = useState(productid);
-    
-    
-    
-    useEffect(()=>{
-            seleccionarProducto.then((response)=>{
-                setItem(response)
-            })
-        }, [productid])
-    
-    
-    const seleccionarProducto = new Promise ((resolve, reject) => {
+    const [loading, setLoading] = useState(true);
+    const [existsInDb, setExistsInDb] = useState(false);
 
-        setTimeout(()=>{
-            const nuevoProducto = Productos.filter((producto) => producto.id === productid);
-            resolve(nuevoProducto)
-        });
 
-    })
+    useEffect(()=> {
 
+        const db = getFirestore();
+        const item = doc(db, "item", productid);
+        
+        getDoc(item).then((result) => {
+
+            if(result.exists()){
+                const updatedItem = [...[result.data()]]
+                const newItem = {...result.data(), id:productid};
+                updatedItem.splice(result.data(), 1, newItem);
+                
+                setExistsInDb(true)
+                setItem(updatedItem)
+                setLoading(false)
+            } else {
+                setExistsInDb(false)
+                setLoading(false)
+            }
+                
+        })
+
+        
+    }, [productid])
     
     
     return(
-        <div className="bg-light vh-100">
-            <Container>
+        <div className="bg-light min-vh-100 py-5">
+            <Container className="py-5">
 
-                <Row className="justify-content-left py-5 g-4"  xs={1} md={2}>
-                    <ItemDetail item={item} key={item.id}/>
-                </Row>
-            
+            {   
+               loading ? 
+                <Loader /> :
+                    existsInDb ?
+                        <ItemDetail item={item} existsInDb={existsInDb}  /> :
+                            <ItemNotFound/>
+            }
+                
             </Container>
         </div>
     )

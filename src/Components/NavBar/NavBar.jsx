@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import CartWidget from "../CartWidget/CartWidget";
 import Logo from "../Logo/Logo";
@@ -8,16 +9,22 @@ const NavBar = ({categories}) =>{
     return (
     <Navbar bg="white" expand="lg" className="shadow-sm p-4">
       <Container>
-        <Navbar.Brand href="/"><Logo/></Navbar.Brand>
+      <Link to={'/'}><Navbar.Brand><Logo/></Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
         
         <Nav className="ms-auto">
-            <Nav.Link href="/">Inicio</Nav.Link>
+            <Link to={'/'} className="text-decoration-none"><Nav.Link as="span">Inicio</Nav.Link></Link>
             <NavDropdown title="Productos" id="basic-nav-dropdown" className="me-5">
                 
                 {categories.map((category) => {
-                    return <NavDropdown.Item href={`/category/${category.id}`} key={category.id}>{category.nombre}</NavDropdown.Item>
+                    
+                    return(
+                    <Link to={`/category/${category.id}`} className="text-decoration-none" key={category.id}>
+                      <NavDropdown.Item as="span">{category.nombre}</NavDropdown.Item>
+                    </Link>
+                    )
+
                 })}
 
             </NavDropdown>
